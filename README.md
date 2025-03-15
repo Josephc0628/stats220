@@ -9,6 +9,7 @@ A little about me:
 - **Degree:** I am undertaking a degree in *stats and psychology*.
 - **Motivation:** I am taking STATS 220 because it seems fun.
 - **Interest:** I am interested in learning about how data is everywhere.
+- **Instagram:** Follow me on Instagram: [josephc020628](https://www.instagram.com/josephc020628/)
 
 ## My Feelings About University Studies
 
@@ -22,4 +23,4 @@ Here's what I hope to learn:
 
 1.  **Data Analysis Techniques:**  Understanding different statistical methods.
 2.  *Data Visualization:* Creating compelling and informative charts and graphs.
-    *   Effective Communication: Presenting findings clearly and concisely.
+3.  *Effective Communication:* Presenting findings clearly and concisely.
