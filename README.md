@@ -14,7 +14,7 @@ A little about me:
 
 A meme that captures how I currently feel about my university studies is:
 
-![](https://media1.tenor.com/m/_OyfFlQurcMAAAAd/taylor-swift-reputation.gif)
+![]([https://media1.tenor.com/m/_OyfFlQurcMAAAAd/taylor-swift-reputation.gif]
 
 ### Key Skills I Hope to Gain
 
