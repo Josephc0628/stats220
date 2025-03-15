@@ -10,6 +10,7 @@ A little about me:
 - **Motivation:** I am taking STATS 220 because it seems fun.
 - **Interest:** I am interested in learning about how data is everywhere.
 - **Instagram:** Follow me on Instagram: [josephc020628](https://www.instagram.com/josephc020628/)
+- **Favorite Artist:** My favorite artist is Taylor Swift: [taylorswift](https://www.instagram.com/taylorswift/)
 
 ## My Feelings About University Studies
 
