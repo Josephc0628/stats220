@@ -1,6 +1,6 @@
 # STATS 220
 
-This is my repo for STATS 220.
+**This is my repo for STATS 220.**
 
 ## About Me
 
@@ -22,6 +22,6 @@ A meme that captures how I currently feel about my university studies is:
 
 Here's what I hope to learn:
 
-1.  **Data Analysis Techniques:**  Understanding different statistical methods.
+1.  *Data Analysis Techniques:*  Understanding different statistical methods.
 2.  *Data Visualization:* Creating compelling and informative charts and graphs.
 3.  *Effective Communication:* Presenting findings clearly and concisely.
