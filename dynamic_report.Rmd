@@ -1,0 +1,153 @@
+---
+title: My dynamic report
+output: html_fragment 
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
+
+library(tidyverse)
+
+logged_data <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vTFPhlseVC8C_DG8O5FgIeq88eSG7cXLjYchqI7YV-ffjgfFILLzxtDMA1L7Wz79MURXMizGgdwjVM4/pub?gid=1282172722&single=true&output=csv")
+ 
+# Rename the variables
+latest_data <- logged_data %>%
+  rename(
+    video_type = `What YouTube video did you watch?`,
+    watch_time = `When did you watch this video?`,
+    video_length = `How long was the video? (minutes, only need to tell us the number`
+  )
+
+# Convert video_length to numeric
+latest_data <- latest_data %>%
+  mutate(video_length = as.numeric(video_length))
+
+# 1. Summary Values
+
+# a. Average video length
+mean_video_length <- latest_data %>%
+  summarize(mean_length = mean(video_length, na.rm = TRUE))
+
+# b. Minimum video length
+min_video_length <- latest_data %>%
+  summarize(min_length = min(video_length, na.rm = TRUE))
+
+# c. Maximum video length
+max_video_length <- latest_data %>%
+  summarize(max_length = max(video_length, na.rm = TRUE))
+
+# d. Number of responses for each video type
+video_type_counts <- latest_data %>%
+  group_by(video_type) %>%
+  summarize(count = n())
+
+# e. Number of responses for each watch_time
+watch_time_counts <- latest_data %>%
+  group_by(watch_time) %>%
+  summarize(count = n())
+
+# f. Total number of responses
+total_responses <- nrow(latest_data)
+
+# 2. Bar Charts
+
+# a. Bar chart of video types
+video_type_plot <- ggplot(latest_data, aes(x = video_type)) +
+  geom_bar(fill = "#FFFF00") +
+  labs(
+    title = "Distribution of Watched Video Types",
+    x = "Video Type",
+    y = "Number of Responses"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# b. Bar chart of watch times
+watch_time_plot <- ggplot(latest_data, aes(x = watch_time)) +
+  geom_bar(fill = "#440154FF") +
+  labs(
+    title = "Distribution of Watch Times",
+    x = "Time of Day",
+    y = "Number of Responses"
+  ) +
+  theme_minimal()
+
+```
+
+```{css}
+/* Add some basic styling */
+body {
+  font-family: sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #490;
+  padding: 20px;
+}
+
+h2 {
+  color: #0056b3;
+  border-bottom: 2px solid #0056b3;
+  padding-bottom: 5px;
+  margin-top: 30px;
+}
+
+p {
+  margin-bottom: 15px;
+}
+
+.plot-container {
+  margin-top: 20px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+/* Style the dynamic comments */
+.dynamic-comment {
+  font-style: italic;
+  color: #777;
+}
+```
+
+## My YouTube Engagement Analysis
+
+This report analyzes data on my YouTube viewing habits, focusing on video types, watch times, and video lengths.
+
+
+  Average video length watched was `r round(mean_video_length$mean_length, 2)` minutes.
+  
+  The shortest video watched was `r min_video_length$min_length` minutes, and the longest was `r max_video_length$max_length` minutes.
+
+<div class="plot-container">
+
+<h3>Video Type Distribution</h3>
+
+```{r, fig.width=6, fig.height=4}
+
+video_type_plot
+
+```
+
+<p class="dynamic-comment">My most popular video types are:
+  `r 
+  top_video_types <- video_type_counts %>% 
+    arrange(desc(count)) %>% 
+    slice(1:2) # Get the top 2
+
+  paste(top_video_types$video_type, " (", top_video_types$count, " views)", collapse = ", ")
+  `.</p>
+
+</div>
+
+<div class = "plot-container">
+
+<h3>Watch Time Analysis</h3>
+
+```{r, fig.width=6, fig.height=4}
+
+watch_time_plot
+
+```
+
+<p class="dynamic-comment">My most frequent watch time appears to be `r watch_time_counts %>% arrange(desc(count)) %>% slice(1) %>% pull(watch_time)`. 
