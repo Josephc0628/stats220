@@ -1,6 +1,6 @@
 ---
-title: My dynamic report
-output: html_fragment 
+title: My YouTube Engagement Analysis
+output: html_fragment
 ---
 
 ```{r setup, include=FALSE}
@@ -72,6 +72,7 @@ watch_time_plot <- ggplot(latest_data, aes(x = watch_time)) +
   ) +
   theme_minimal()
 
+
 ```
 
 ```{css}
@@ -80,12 +81,15 @@ body {
   font-family: sans-serif;
   line-height: 1.6;
   color: #333;
-  background-color: #490;
+  background-color: #f0f0f0; /* Light gray background */
   padding: 20px;
 }
 
-h2 {
+h1, h2, h3 {
   color: #0056b3;
+}
+
+h2 {
   border-bottom: 2px solid #0056b3;
   padding-bottom: 5px;
   margin-top: 30px;
@@ -108,46 +112,40 @@ p {
   font-style: italic;
   color: #777;
 }
+
+/* Style for plot titles */
+.plot-title {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
 ```
+
 
 ## My YouTube Engagement Analysis
 
 This report analyzes data on my YouTube viewing habits, focusing on video types, watch times, and video lengths.
 
+**Summary Statistics**
 
-  Average video length watched was `r round(mean_video_length$mean_length, 2)` minutes.
-  
-  The shortest video watched was `r min_video_length$min_length` minutes, and the longest was `r max_video_length$max_length` minutes.
+*   Average video length watched was `r round(mean_video_length$mean_length, 2)` minutes.
+*   The shortest video watched was `r min_video_length$min_length` minutes, and the longest was `r max_video_length$max_length` minutes.
 
-<div class="plot-container">
+## Video Type Distribution
 
-<h3>Video Type Distribution</h3>
 
-```{r, fig.width=6, fig.height=4}
-
-video_type_plot
+```{r video-type-plot-chunk, fig.width=6, fig.height=4}  
+print(video_type_plot)
 
 ```
 
-<p class="dynamic-comment">My most popular video types are:
-  `r 
-  top_video_types <- video_type_counts %>% 
-    arrange(desc(count)) %>% 
-    slice(1:2) # Get the top 2
 
-  paste(top_video_types$video_type, " (", top_video_types$count, " views)", collapse = ", ")
-  `.</p>
 
-</div>
+## Watch Time Analysis
 
-<div class = "plot-container">
-
-<h3>Watch Time Analysis</h3>
-
-```{r, fig.width=6, fig.height=4}
-
-watch_time_plot
+```{r watch_time_plot, fig.width=6, fig.height=4}  
+print(watch_time_plot)
 
 ```
 
-<p class="dynamic-comment">My most frequent watch time appears to be `r watch_time_counts %>% arrange(desc(count)) %>% slice(1) %>% pull(watch_time)`. 
+
